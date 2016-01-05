@@ -2,12 +2,21 @@ package com.appgraph.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuario")
 public class Usuario implements Serializable{
 
 	private Integer uid;
 	private String usuario;
 	private String senha;
 	
+	@Id
+	@GeneratedValue
 	public Integer getUid() {
 		return uid;
 	}
