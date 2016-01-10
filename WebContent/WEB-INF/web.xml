@@ -18,6 +18,22 @@
 		<welcome-file>testeGrafico.xhtml</welcome-file>
 	</welcome-file-list>
 
+    <!-- Login filter -->
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.appgraph.filters.LoginFilter</filter-class>
+	</filter>
+	<!-- Set the login filter to secure all the pages in the /secured/* path of the application  -->
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/secured/*</url-pattern>
+	</filter-mapping>
+
+	<!-- By default go to secured welcome page -->
+	<welcome-file-list>
+		<welcome-file>secured/welcome.xhtml</welcome-file>
+	</welcome-file-list>
+
 	<!--<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener> -->

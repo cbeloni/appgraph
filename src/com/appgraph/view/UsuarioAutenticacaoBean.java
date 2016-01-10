@@ -19,6 +19,8 @@ import com.appgraph.util.HibernateUtil;
 @ManagedBean
 @SessionScoped
 public class UsuarioAutenticacaoBean implements Serializable{
+	private boolean logado;
+	
 	private Usuario usuario = new Usuario();
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	
@@ -39,13 +41,33 @@ public class UsuarioAutenticacaoBean implements Serializable{
 						  .setProjection(Projections.rowCount())
 						  .uniqueResult();
 		
-		if (count == 1) {
-			System.out.println("Logado");
-		} else {
+		if (count == 1 && !isLogado()) {
+			setLogado(true);
+			System.out.println("Logado");		
+		} else if (isLogado()) {
+			System.out.println("Já estava logado");
+		}		
+		else {
 			System.out.println("Nao Logado");
 		}
-			
+					
 		session.close();
 		
 	}
-}
+	
+	public void sair(){
+		if (isLogado())  {
+			setLogado(false);
+			System.out.println("Logout com sucesso!");
+		}
+	}
+
+	public boolean isLogado() {
+		return logado;
+	}
+
+	public void setLogado(boolean logado) {
+		this.logado = logado;
+	}
+
+	}

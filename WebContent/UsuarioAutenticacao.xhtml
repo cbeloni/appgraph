@@ -13,17 +13,23 @@
 	
 	<h:form id="frm">
 		<div>
-	        <h:outputLabel for="name" value="Usuario"/>
-	        <h:inputText id="name" value="#{usuarioAutenticacaoBean.usuario.usuario}"/>
+	        <h:outputLabel for="name" value="Usuario" rendered="#{not usuarioAutenticacaoBean.logado}"/>
+	        <h:inputText id="name" value="#{usuarioAutenticacaoBean.usuario.usuario}" rendered="#{not usuarioAutenticacaoBean.logado}"/>
 	    </div>
 	
 	    <div>
-	        <h:outputLabel for="password" value="Password"/>
-	        <h:inputSecret id="password" value="#{usuarioAutenticacaoBean.usuario.senha}" redisplay="true"/>
+	        <h:outputLabel for="password" value="Password" rendered="#{not usuarioAutenticacaoBean.logado}"/>
+	        <h:inputSecret id="password" value="#{usuarioAutenticacaoBean.usuario.senha}" redisplay="true"
+	        			   rendered="#{not usuarioAutenticacaoBean.logado}"/>
 	    </div>
-	
+		
+		<div>
+	        <h:outputLabel value="Logado com o usuário: #{usuarioAutenticacaoBean.usuario.usuario}" rendered="#{usuarioAutenticacaoBean.logado}"/>
+	    </div>
+		
 	    <div>
-	        <h:commandButton id="login" value="Login" action="#{usuarioAutenticacaoBean.autenticar}"/>
+	        <h:commandButton id="login" value="Login" action="#{usuarioAutenticacaoBean.autenticar}" rendered="#{not usuarioAutenticacaoBean.logado}"/>
+	        <h:commandButton id="logout" value="Logout" action="#{usuarioAutenticacaoBean.sair}" rendered="#{usuarioAutenticacaoBean.logado}"/>
 	    </div>
 		
 	</h:form>
