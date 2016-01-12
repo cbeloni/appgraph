@@ -11,20 +11,20 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.appgraph.view.LoginBean;
+import com.appgraph.view.UsuarioAutenticacaoBean;
 
-public class LoginFilter implements Filter {
+public class UsuarioAutenticacaoFilter implements Filter {
 
 	/**
 	 * Checks if user is logged in. If not it redirects to the login.xhtml page.
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// Get the loginBean from session attribute
-		LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
+		UsuarioAutenticacaoBean usuarioAutenticacaoBean = (UsuarioAutenticacaoBean)((HttpServletRequest)request).getSession().getAttribute("usuarioAutenticacaoBean");
 		
 		// For the first application request there is no loginBean in the session so user needs to log in
 		// For other requests loginBean is present but we need to check if user has logged in successfully
-		if (loginBean == null || !loginBean.isLoggedIn()) {
+		if (usuarioAutenticacaoBean == null || !usuarioAutenticacaoBean.isLogado()) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/UsuarioAutenticacao.xhtml");
 		}

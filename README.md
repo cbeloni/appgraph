@@ -2,6 +2,7 @@
 to do:
 - criar template das páginas
 - implementar maven
-- módulo sessão usuário
 - server rest
 - client rest
+- Componente de mensagens
+- Estilos CSS
