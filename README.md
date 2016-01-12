@@ -6,3 +6,4 @@ to do:
 - client rest
 - Componente de mensagens
 - Estilos CSS
+- Criar padrão repository
