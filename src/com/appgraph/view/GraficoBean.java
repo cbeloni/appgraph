@@ -29,24 +29,15 @@ public class GraficoBean implements Serializable {
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
  
-        ChartSeries boys = new ChartSeries();
-        boys.setLabel("Boys");
-        boys.set("2004", 120);
-        boys.set("2005", 100);
-        boys.set("2006", 44);
-        boys.set("2007", 150);
-        boys.set("2008", 25);
+        ChartSeries serie = new ChartSeries();
+        serie.setLabel("7040");
+        serie.set("1h", 120);
+        serie.set("2h", 100);
+        serie.set("3h", 44);
+        serie.set("4h", 150);
+        serie.set("5h", 25);
  
-        ChartSeries girls = new ChartSeries();
-        girls.setLabel("Girls");
-        girls.set("2004", 52);
-        girls.set("2005", 60);
-        girls.set("2006", 110);
-        girls.set("2007", 135);
-        girls.set("2008", 120);
- 
-        model.addSeries(boys);
-        model.addSeries(girls);
+        model.addSeries(serie);
          
         return model;
     }
@@ -58,14 +49,14 @@ public class GraficoBean implements Serializable {
     private void createBarModel() {
         barModel = initBarModel();
          
-        barModel.setTitle("Bar Chart");
+        barModel.setTitle("Tempo processamento");
         barModel.setLegendPosition("ne");
          
         Axis xAxis = barModel.getAxis(AxisType.X);
-        xAxis.setLabel("Gender");
+        xAxis.setLabel("Tempo");
          
         Axis yAxis = barModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Births");
+        yAxis.setLabel("Quantidade");
         yAxis.setMin(0);
         yAxis.setMax(200);
     }
