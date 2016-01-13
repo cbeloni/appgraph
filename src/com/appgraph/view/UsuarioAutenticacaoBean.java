@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.appgraph.model.Usuario;
 import com.appgraph.util.HibernateUtil;
+import com.appgraph.service.GestaoUsuario;
 
 @ManagedBean
 @SessionScoped
@@ -34,14 +35,10 @@ public class UsuarioAutenticacaoBean implements Serializable{
 	
 	@SuppressWarnings("unchecked")
 	public void autenticar(){	
-		Session session = HibernateUtil.getSession();	
-		Long count = (Long) session.createCriteria(Usuario.class)
-						  .add(Restrictions.eq("usuario", usuario.getUsuario()))
-						  .add(Restrictions.eq("senha", usuario.getSenha()))
-						  .setProjection(Projections.rowCount())
-						  .uniqueResult();
+
+		GestaoUsuario gestaoUsuario = new GestaoUsuario(this.usuario);
 		
-		if (count == 1 && !isLogado()) {
+		if (gestaoUsuario.existeUsuario() && !isLogado()) {
 			setLogado(true);
 			System.out.println("Logado");		
 		} else if (isLogado()) {
@@ -49,9 +46,7 @@ public class UsuarioAutenticacaoBean implements Serializable{
 		}		
 		else {
 			System.out.println("Nao Logado");
-		}
-					
-		session.close();
+		}							
 		
 	}
 	

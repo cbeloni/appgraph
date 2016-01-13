@@ -15,15 +15,9 @@ import com.appgraph.view.UsuarioAutenticacaoBean;
 
 public class UsuarioAutenticacaoFilter implements Filter {
 
-	/**
-	 * Checks if user is logged in. If not it redirects to the login.xhtml page.
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// Get the loginBean from session attribute
 		UsuarioAutenticacaoBean usuarioAutenticacaoBean = (UsuarioAutenticacaoBean)((HttpServletRequest)request).getSession().getAttribute("usuarioAutenticacaoBean");
 		
-		// For the first application request there is no loginBean in the session so user needs to log in
-		// For other requests loginBean is present but we need to check if user has logged in successfully
 		if (usuarioAutenticacaoBean == null || !usuarioAutenticacaoBean.isLogado()) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse)response).sendRedirect(contextPath + "/UsuarioAutenticacao.xhtml");
