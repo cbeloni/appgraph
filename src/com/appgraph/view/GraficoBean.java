@@ -3,6 +3,7 @@ package com.appgraph.view;
 import javax.annotation.PostConstruct;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
@@ -10,6 +11,9 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+
+import com.appgraph.model.Grafico;
+import com.appgraph.service.GestaoGrafico;
  
 @SuppressWarnings("serial")
 @ManagedBean
@@ -28,14 +32,25 @@ public class GraficoBean implements Serializable {
  
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
- 
+        GestaoGrafico gg = new GestaoGrafico();
+        String nomeGrafico = "BKO_APOIO_7054";
+        List<Grafico> linhasGrafico = gg.porNome(nomeGrafico);
+        
         ChartSeries serie = new ChartSeries();
-        serie.setLabel("7040");
-        serie.set("1h", 120);
+        serie.setLabel(nomeGrafico);
+        for (Grafico lGrafico : linhasGrafico) {
+			System.out.println(lGrafico.getSerie());
+			System.out.println(lGrafico.getEixo_y());
+			int y = Integer.parseInt(lGrafico.getEixo_y());
+			serie.set(lGrafico.getSerie().toString(),y);
+		}
+        
+        /*serie.set("1h", 120);
         serie.set("2h", 100);
         serie.set("3h", 44);
         serie.set("4h", 150);
-        serie.set("5h", 25);
+        serie.set("5h", 25);*/
+        
  
         model.addSeries(serie);
          
@@ -58,7 +73,7 @@ public class GraficoBean implements Serializable {
         Axis yAxis = barModel.getAxis(AxisType.Y);
         yAxis.setLabel("Quantidade");
         yAxis.setMin(0);
-        yAxis.setMax(200);
+        yAxis.setMax(500);
     }
         
  
