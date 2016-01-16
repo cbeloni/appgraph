@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.appgraph.model.Grafico;
@@ -33,6 +34,23 @@ public class GestaoGrafico {
 		session.close();
 			
 		return graficos;
+	}
+	
+	public List<String> obtemNomeGraficos () {
+		Session session = HibernateUtil.getSession();
+		UsuarioAutenticacaoBean usuarioAutenticacaoBean = (UsuarioAutenticacaoBean) FacesUtil.getSessionAttribute("usuarioAutenticacaoBean");
+		Usuario usuario = usuarioAutenticacaoBean.getUsuario();		
+			
+		@SuppressWarnings("unchecked")
+		List<String> nomeGraficos = (List<String>) session.createCriteria(Grafico.class)       
+				                        .add(Restrictions.eq("uid_usuario", usuario.getUid()))      
+								        .setProjection(Projections.projectionList()
+								                .add(Projections.groupProperty("nome_grafico"))
+								        ).list();
+		
+		session.close();
+			
+		return nomeGraficos;
 	}
 	
 	public Grafico porCodigo (Integer codigo) {
