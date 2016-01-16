@@ -36,21 +36,16 @@ public class GraficoBean implements Serializable {
         String nomeGrafico = "BKO_APOIO_7054";
         List<Grafico> linhasGrafico = gg.porNome(nomeGrafico);
         
+        List<String> nomesGraficos = gg.obtemNomeGraficos();        
+        for (String nomes : nomesGraficos) {
+			System.out.println(nomes);
+		}
+        
         ChartSeries serie = new ChartSeries();
         serie.setLabel(nomeGrafico);
         for (Grafico lGrafico : linhasGrafico) {
-			System.out.println(lGrafico.getSerie());
-			System.out.println(lGrafico.getEixo_y());
-			int y = Integer.parseInt(lGrafico.getEixo_y());
-			serie.set(lGrafico.getSerie().toString(),y);
-		}
-        
-        /*serie.set("1h", 120);
-        serie.set("2h", 100);
-        serie.set("3h", 44);
-        serie.set("4h", 150);
-        serie.set("5h", 25);*/
-        
+			serie.set(lGrafico.getSerie().toString(),Integer.parseInt(lGrafico.getEixo_y()));
+		}        
  
         model.addSeries(serie);
          
