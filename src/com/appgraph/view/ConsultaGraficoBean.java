@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.appgraph.service.GestaoGrafico;
-import com.appgraph.view.NavigationBean;
 
 @ManagedBean
 @SessionScoped
@@ -44,9 +43,6 @@ public class ConsultaGraficoBean implements Serializable {
 	}
 
 	public List<String> getNomesGraficos() {
-		/*for (String g : nomesGraficos) {
-			System.out.println(g);
-		}*/
 		return nomesGraficos;
 	}
 

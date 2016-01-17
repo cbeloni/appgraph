@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.appgraph.model.Usuario;
 import com.appgraph.service.GestaoUsuario;
+import com.appgraph.util.FacesUtil;
 import com.appgraph.view.NavigationBean;
 
 @ManagedBean
@@ -51,11 +52,13 @@ public class UsuarioAutenticacaoBean implements Serializable{
 		
 	}
 	
-	public void sair(){
+	public String sair(){
 		if (isLogado())  {
 			setLogado(false);
+			FacesUtil.InvalidateSession();
 			System.out.println("Logout com sucesso!");
 		}
+		return navigationBean.IrParaIndex();
 	}
 
 	public boolean isLogado() {

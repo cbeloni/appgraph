@@ -51,7 +51,9 @@ public class GestaoGrafico {
 		Transaction tx = session.beginTransaction();
 		UsuarioAutenticacaoBean usuarioAutenticacaoBean = (UsuarioAutenticacaoBean) FacesUtil.getSessionAttribute("usuarioAutenticacaoBean");
 		Usuario usuario = usuarioAutenticacaoBean.getUsuario();		
-			
+		
+		System.out.println("usuario.getUid()");
+		System.out.println(usuario.getUid());
 		@SuppressWarnings("unchecked")
 		List<String> nomeGraficos = (List<String>) session.createCriteria(Grafico.class)       
 				                        .add(Restrictions.eq("uid_usuario", usuario.getUid()))      
