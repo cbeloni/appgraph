@@ -18,7 +18,14 @@
 
 			<h:column>
 				<f:facet name="header">NomeGrafico</f:facet>
-				<h:outputText value="#{grafico}" />
+				
+				<h:commandLink action="#{consultaGraficoBean.abrirGrafico}">
+					<h:outputText value="#{grafico}"/>
+					<f:setPropertyActionListener
+						target="#{consultaGraficoBean.nomeGraficoSelecionado}"
+						value="#{grafico}" />
+				</h:commandLink>
+
 			</h:column>
 		</h:dataTable>
 	</h:form>

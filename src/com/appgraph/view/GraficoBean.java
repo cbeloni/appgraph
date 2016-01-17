@@ -33,11 +33,11 @@ public class GraficoBean implements Serializable {
     private BarChartModel initBarModel() {
         BarChartModel model = new BarChartModel();
         
-        String nomeGrafico = "BKO_APOIO_7054";
+        
         GestaoGrafico gg = new GestaoGrafico();            
-        List<Grafico> linhasGrafico = gg.porNome(nomeGrafico);        
+        List<Grafico> linhasGrafico = gg.porNome();        
         ChartSeries serie = new ChartSeries();
-        serie.setLabel(nomeGrafico);
+        serie.setLabel(linhasGrafico.get(1).getNome_grafico());
         for (Grafico lGrafico : linhasGrafico) {
 			serie.set(lGrafico.getSerie().toString(),Integer.parseInt(lGrafico.getEixo_y()));
 		}        

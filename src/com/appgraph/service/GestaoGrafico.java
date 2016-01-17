@@ -13,19 +13,29 @@ import com.appgraph.model.Grafico;
 import com.appgraph.model.Usuario;
 import com.appgraph.util.FacesUtil;
 import com.appgraph.util.HibernateUtil;
+import com.appgraph.view.ConsultaGraficoBean;
 import com.appgraph.view.UsuarioAutenticacaoBean;
 
 public class GestaoGrafico {
-		
-	public List<Grafico> porNome (String nome) {
+	
+	
+	public List<Grafico> porNome () {
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		
 		UsuarioAutenticacaoBean usuarioAutenticacaoBean = (UsuarioAutenticacaoBean) FacesUtil.getSessionAttribute("usuarioAutenticacaoBean");
+		ConsultaGraficoBean consultaGraficoBean = (ConsultaGraficoBean) FacesUtil.getSessionAttribute("consultaGraficoBean");
+		if (consultaGraficoBean == null) {
+			System.out.println("consultaGraficoBean null");
+		}
+		else {
+			System.out.println("consultaGraficoBean not null");	
+		}	
+		
 		Usuario usuario = usuarioAutenticacaoBean.getUsuario();			
 		@SuppressWarnings("unchecked")
 		List<Grafico> graficos = (List<Grafico>) session.createCriteria(Grafico.class)
-				.add(Restrictions.eq("nome_grafico", nome))
+				.add(Restrictions.eq("nome_grafico", consultaGraficoBean.getNomeGraficoSelecionado()))
 				.add(Restrictions.eq("uid_usuario", usuario.getUid()))
 				.addOrder(Order.asc("id"))
 				.list();
@@ -64,4 +74,5 @@ public class GestaoGrafico {
 		return g;
 	}
 	
+
 }
