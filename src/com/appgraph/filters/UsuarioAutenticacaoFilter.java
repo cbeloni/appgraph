@@ -20,7 +20,7 @@ public class UsuarioAutenticacaoFilter implements Filter {
 		
 		if (usuarioAutenticacaoBean == null || !usuarioAutenticacaoBean.isLogado()) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(contextPath + "/UsuarioAutenticacao.xhtml");
+			((HttpServletResponse)response).sendRedirect(contextPath + "/index.xhtml");
 		}
 		
 		chain.doFilter(request, response);

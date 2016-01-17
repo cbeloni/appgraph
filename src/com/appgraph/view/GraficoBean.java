@@ -20,8 +20,9 @@ import com.appgraph.service.GestaoGrafico;
 public class GraficoBean implements Serializable {
  
     private BarChartModel barModel;
- 
-    @PostConstruct
+    private int max_eixo_y = 0;       
+
+	@PostConstruct
     public void init() {
         createBarModels();
     }
@@ -40,6 +41,9 @@ public class GraficoBean implements Serializable {
         serie.setLabel(linhasGrafico.get(1).getNome_grafico());
         for (Grafico lGrafico : linhasGrafico) {
 			serie.set(lGrafico.getSerie().toString(),Integer.parseInt(lGrafico.getEixo_y()));
+			if (max_eixo_y < Integer.parseInt(lGrafico.getEixo_y())) {
+				setMax_eixo_y(Integer.parseInt(lGrafico.getEixo_y()));
+			}
 		}        
  
         model.addSeries(serie);
@@ -63,8 +67,14 @@ public class GraficoBean implements Serializable {
         Axis yAxis = barModel.getAxis(AxisType.Y);
         yAxis.setLabel("Quantidade");
         yAxis.setMin(0);
-        yAxis.setMax(500);
+        yAxis.setMax(getMax_eixo_y() + (getMax_eixo_y()*20)/100);        
     }
         
- 
+    public int getMax_eixo_y() {
+		return max_eixo_y;
+	}
+
+	public void setMax_eixo_y(int max_eixo_y) {
+		this.max_eixo_y = max_eixo_y;
+	}
 }
